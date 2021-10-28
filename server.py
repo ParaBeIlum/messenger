@@ -5,10 +5,11 @@ import pathlib
 import json
 import os
 import uuid
+from sys import argv
 from datetime import datetime
 
 MAX_CONNECTIONS = 51
-SERVER_IP = ""
+SERVER_IP = argv[1]
 SERVER_PORTS = [8000, 8001]
 inputs = []
 servers = []
