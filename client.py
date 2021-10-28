@@ -3,7 +3,7 @@ import errno
 import sys
 import json
 
-SERVER_IP = "192.168.56.1"
+SERVER_IP = ""
 SERVER_PORTS = [8000, 8001]
 
 
