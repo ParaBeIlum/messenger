@@ -1,5 +1,4 @@
 # messenger
-===========
 
 This project is intended for demonstration for a job interview in Veeame Software company.
 
