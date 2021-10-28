@@ -3,7 +3,7 @@ import errno
 import sys
 import json
 
-SERVER_IP = ""
+SERVER_IP = sys.argv[1]
 SERVER_PORTS = [8000, 8001]
 
 
