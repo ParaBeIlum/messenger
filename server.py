@@ -5,11 +5,11 @@ import pathlib
 import json
 import os
 import uuid
-from sys import argv
+import sys
 from datetime import datetime
 
+
 MAX_CONNECTIONS = 51
-SERVER_IP = argv[1]
 SERVER_PORTS = [8000, 8001]
 inputs = []
 servers = []
@@ -57,7 +57,7 @@ def generate_id(string):
     return uuid.uuid5(uuid.NAMESPACE_DNS, string)
 
 
-def get_server_socket(port):
+def get_server_socket(ip, port):
     """
     Starts the socket server
 
@@ -73,7 +73,7 @@ def get_server_socket(port):
     """
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server.bind((SERVER_IP, port))
+    server.bind((ip, port))
     server.listen(MAX_CONNECTIONS)
     return server
 
@@ -96,8 +96,7 @@ def handle_sockets():
                     client_socket.send(''.encode())
                 else:
                     uid = str(generate_id(data))
-                    encoded = uid.encode()
-                    client_socket.send(encoded)
+                    client_socket.send(f"Your unique authentication code: {uid}".encode())
                     clients[data] = uid
                     logger.info(f"Registered new user with identifier <{data}>")
             else:
@@ -117,12 +116,15 @@ def handle_sockets():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        sys.exit(f"Usage: {sys.argv[0]} HOST_IP")
     logger = initialize_logger()
     for port in SERVER_PORTS:
-        server_socket = get_server_socket(port)
+        ip = sys.argv[1]
+        server_socket = get_server_socket(ip, port)
         inputs.append(server_socket)
         servers.append(server_socket)
-        logger.info(f"Server started on {SERVER_IP}:{port}")
+        logger.info(f"Server started on {ip}:{port}")
     try:
         while True:
             handle_sockets()
