@@ -116,7 +116,7 @@ def handle_sockets():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         sys.exit(f"Usage: {sys.argv[0]} HOST_IP")
     logger = initialize_logger()
     for port in SERVER_PORTS:

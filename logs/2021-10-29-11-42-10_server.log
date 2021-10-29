@@ -1,0 +1,6 @@
+[2021-10-29 11:42:10,472] - INFO - Server started on 192.168.56.1:8000
+[2021-10-29 11:42:10,472] - INFO - Server started on 192.168.56.1:8001
+[2021-10-29 11:42:27,333] - INFO - New connection from ('192.168.56.1', 57238).
+[2021-10-29 11:42:27,340] - INFO - Registered new user with identifier <sd>
+[2021-10-29 11:42:37,636] - INFO - New connection from ('192.168.56.1', 57245).
+[2021-10-29 11:42:37,637] - INFO - MESSAGE - sd >>> sdf
