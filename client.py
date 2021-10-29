@@ -3,19 +3,19 @@ import errno
 import sys
 import json
 
-SERVER_IP = sys.argv[1]
+
 SERVER_PORTS = [8000, 8001]
 
 
-def connect_server(port):
+def connect_server(ip, port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect((SERVER_IP, port))
+    client_socket.connect((ip, port))
     return client_socket
 
 
 while True:
     identifier = input("Enter your unique identifier: ")
-    code_getting_socket = connect_server(SERVER_PORTS[0])
+    code_getting_socket = connect_server(sys.argv[1], SERVER_PORTS[0])
     data = identifier.encode()
     code_getting_socket.send(data)
     server_response = code_getting_socket.recv(1024)
@@ -29,7 +29,7 @@ identifier = input("Enter your identifier: ")
 code = input("Enter your verification code: ")
 message = input("Enter your message: ")
 data = json.dumps({"identifier": identifier, "code": code, "message": message})
-message_sending_socket = connect_server(SERVER_PORTS[1])
+message_sending_socket = connect_server(sys.argv[1], SERVER_PORTS[1])
 message_sending_socket.send(data.encode())
 try:
     response = message_sending_socket.recv(1024)
